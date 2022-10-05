@@ -1,0 +1,38 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+        <form method="post">
+          {% csrf_token %}
+      <div class="row mb-3">
+        <a class="nav-item nav-link" href="{% url 'questions-tests' poll_id=question.poll_id %}">К списку вопросов</a>
+      </div>
+      <div class="row mb-3">
+        <p class="fw-bold">Вопрос: {{ question.text }}</p>
+      </div>
+      <fieldset class="row mb-3">
+        <p class="fw-bold">Варианты ответа:</p>
+        <div class="col-sm-10">
+          {% for answer_option in answer_options %}
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer_option" value="{{ answer_option.id }}" {{ disabled }} 
+              {% if user_answer is not None %}
+              {% if answer_option.id == user_answer.answer_options_id  %}
+            	  checked
+          	  {% endif %}
+              {% endif %}
+            >
+            <label class="form-check-label" for="answer_option">
+             {{ answer_option.text }}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <div class="row mb-3">
+        <div class="col-sm-10 offset-sm-2">
+          <div class="form-check">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Ответить</button>
+    </form>
+{% endblock content %}

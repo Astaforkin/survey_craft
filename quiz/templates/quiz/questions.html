@@ -1,0 +1,24 @@
+{% extends "quiz/base.html" %}
+{% block content %}
+      <div class="row mb-3">
+        <p class="fw-bold">{{ poll.title }}</p>
+      </div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Вопрос</th>
+              <th scope="col">Ответ</th>
+            </tr>
+        </thead>
+    {% for question in questions %}
+        <tbody>
+            <tr>
+              <th scope="row">{{ question.order  }}</th>
+              <td><a href="{% url 'question_detail' question_id=question.id %}">{{ question.text }}</a></td>
+              <td></td>
+            </tr>
+        </tbody>
+    {% endfor %}
+        </table>
+{% endblock content %}

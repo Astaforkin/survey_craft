@@ -1,0 +1,21 @@
+﻿{% extends "quiz/base.html" %}
+{% block content %}
+        <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Тест</th>
+              <th scope="col">Прогресс</th>
+            </tr>
+        </thead>
+    {% for poll in polls %}
+        <tbody>
+            <tr>
+              <th scope="row">{{ poll.id}}</th>
+              <td><a href="{% url 'questions-tests' poll_id=poll.id %}">{{ poll.title }}</a></td>
+              <td></td>
+            </tr>
+        </tbody>
+    {% endfor %}
+        </table>
+{% endblock content %}
